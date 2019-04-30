@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -26,7 +25,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private String TAG = "Tag";
-    private TextView txtView;
+    private TextView txtView, txtView2;
     private Button snapBtn, detectBtn;
     private ImageView imageView;
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -38,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         FirebaseApp.initializeApp(this);
 
-        txtView = findViewById(R.id.textView);
+        txtView = findViewById(R.id.textView1);
+        txtView2 = findViewById(R.id.textView2);
         snapBtn = findViewById(R.id.btnSnap);
         detectBtn = findViewById(R.id.btnDetect);
         imageView = findViewById(R.id.imageView);
@@ -101,21 +101,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<FirebaseVisionImageLabel> labels) {
                 float maxConfidence;
-                for (FirebaseVisionImageLabel label: labels){
 
-                    Log.d(TAG, label.getText());
-                    Log.d(TAG, label.getConfidence() + "");
-
-                    txtView.setTextSize(20);
-
-                    txtView.setText(label.getText());
-
-                //   Toast.makeText(this, label.getText(), Toast.LENGTH_SHORT).show();
-
-                    maxConfidence = label.getConfidence();
+                txtView.setText(labels.get(0).getText());
+                txtView2.setText(labels.get(1).getText());
 
 
-                }
+
+//                //for (FirebaseVisionImageLabel label: labels){
+//                for (int i=0;i<3;i++) {
+//                    label = labels.get(i);
+//                    Log.d(TAG, label.getText());
+//                    Log.d(TAG, label.getConfidence() + "");
+//
+//
+//                    txtView.setTextSize(20);
+//
+//                    txtView.setText(label.getText());
+//
+//                //   Toast.makeText(this, label.getText(), Toast.LENGTH_SHORT).show();
+//
+//                    maxConfidence = label.getConfidence();
+//
+//
+//                }
 
 
             }

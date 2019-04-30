@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "150223522812-4r23nsbq9e1qb9lb11ci4dc5kp0hbpje.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.imagerecognition",
+            "certificate_hash": "9a8d4dac71ed01fb77765b9c4698117b2ef65ef1"
+          }
+        },
+        {
           "client_id": "150223522812-52alfqmnrm5s55v23m81mv9j56r7s3ch.apps.googleusercontent.com",
           "client_type": 3
         }

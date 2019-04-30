@@ -9,7 +9,7 @@
     <Button
         android:id="@+id/btnSnap"
         android:layout_width="109dp"
-        android:layout_height="92dp"
+        android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginBottom="16dp"
@@ -21,45 +21,50 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="352dp"
-        android:layout_height="462dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="28dp"
+        android:layout_height="427dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.047"
         tools:srcCompat="@tools:sample/avatars" />
 
     <Button
         android:id="@+id/btnDetect"
         android:layout_width="113dp"
-        android:layout_height="93dp"
+        android:layout_height="46dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="12dp"
         android:onClick="recognizeImage"
-        android:text="Button"
+        android:text="Detect"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/textView1"
+        android:layout_width="59dp"
+        android:layout_height="28dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="25dp"
+        android:text="text1"
+        app:layout_constraintBottom_toTopOf="@+id/btnSnap"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="67dp"
+        android:layout_height="15dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginLeft="84dp"
+        android:layout_marginBottom="100dp"
+        android:text="tex2"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnDetect"
-        app:layout_constraintHorizontal_bias="0.524"
-        app:layout_constraintStart_toEndOf="@+id/btnSnap" />
+        app:layout_constraintStart_toEndOf="@+id/textView1" />
 
 </android.support.constraint.ConstraintLayout>
