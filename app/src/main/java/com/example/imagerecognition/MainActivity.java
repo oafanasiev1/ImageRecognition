@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,7 +26,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private String TAG = "Tag";
-    private TextView txtView, txtView2;
+    private TextView txtView, txtView2, txtViewError;
     private Button snapBtn, detectBtn;
     private ImageView imageView;
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         txtView = findViewById(R.id.textView1);
         txtView2 = findViewById(R.id.textView2);
+        txtViewError = findViewById(R.id.textView4);
         snapBtn = findViewById(R.id.btnSnap);
         detectBtn = findViewById(R.id.btnDetect);
         imageView = findViewById(R.id.imageView);
@@ -91,22 +93,30 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void detectImage(){
+    public void detectImage() {
 
-        FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(imageBitmap);
-        FirebaseVisionImageLabeler labeler = FirebaseVision.getInstance().getOnDeviceImageLabeler();
+        if (imageBitmap == null) {
+            txtViewError.setTextSize(40);
+            txtViewError.setText("Take a Picture first");
+        } else {
+            txtViewError.setText("");
+            FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(imageBitmap);
+            FirebaseVisionImageLabeler labeler = FirebaseVision.getInstance().getOnDeviceImageLabeler();
 
-        labeler.processImage(image).addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionImageLabel>>() {
+            labeler.processImage(image).addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionImageLabel>>() {
 
-            @Override
-            public void onSuccess(List<FirebaseVisionImageLabel> labels) {
-                float maxConfidence;
+                @Override
+                public void onSuccess(List<FirebaseVisionImageLabel> labels) {
+                    float maxConfidence;
 
-                txtView.setTextSize(20);
-                txtView2.setTextSize(20);
-                txtView.setText(labels.get(0).getText());
-                txtView2.setText(labels.get(1).getText());
+                    txtView.setTextSize(30);
+                    txtView2.setTextSize(30);
+                    txtView.setText(labels.get(0).getText());
+                    txtView2.setText(labels.get(1).getText());
 
+                    Toast.makeText(MainActivity.this, labels.get(0).getText() +
+                            " has a highest confidence of " +
+                            labels.get(0).getConfidence(), Toast.LENGTH_LONG).show();
 
 
 //                //for (FirebaseVisionImageLabel label: labels){
@@ -128,18 +138,18 @@ public class MainActivity extends AppCompatActivity {
 //                }
 
 
-            }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        txtView.setText("Cannot recognize");
-                        Log.d("error:", "Cannot recognize");
-                    }
-                });
+                }
+            })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            txtView.setText("Cannot recognize");
+                            Log.d("error:", "Cannot recognize");
+                        }
+                    });
+
+        }
 
     }
-
-
 
 }
