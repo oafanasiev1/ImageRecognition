@@ -102,6 +102,8 @@ public class MainActivity extends AppCompatActivity {
             public void onSuccess(List<FirebaseVisionImageLabel> labels) {
                 float maxConfidence;
 
+                txtView.setTextSize(20);
+                txtView2.setTextSize(20);
                 txtView.setText(labels.get(0).getText());
                 txtView2.setText(labels.get(1).getText());
 
