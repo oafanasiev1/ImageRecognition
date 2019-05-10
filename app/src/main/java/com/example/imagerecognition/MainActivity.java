@@ -32,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     Bitmap imageBitmap;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,29 +47,16 @@ public class MainActivity extends AppCompatActivity {
         snapBtn = findViewById(R.id.btnSnap);
         detectBtn = findViewById(R.id.btnDetect);
         imageView = findViewById(R.id.imageView);
-//        snapBtn.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View view) {
-//                dispatchTakePictureIntent();
-//            }
-//        });
 
-//        detectBtn.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View view) {
-//                detectImage();
-//            }
-//        });
 
     }
 
 
-    public void takeImage(View view){
-        dispatchTakePictureIntent();
-    }
 
+/*
+This method goes around the private method. Makes thee methods in this class encapsulated.
+ */
+    public void takeImage(View view){ dispatchTakePictureIntent(); }
 
     public void recognizeImage(View view){
         detectImage();
@@ -75,15 +65,20 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    /*
+    This method activates the camera intent
+     */
     private void dispatchTakePictureIntent() {
+
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
     }
 
-
-
+/*
+This method is activated when the picture is taken. It saves it as a Bitmap and displays it to the user
+ */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
@@ -93,6 +88,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+
+/*
+This method detectsts the image. The app downloaded the Free Neural Network from the Firebase.
+It sends the image to the Neural Network and returns a list of the answers
+ */
     public void detectImage() {
 
         if (imageBitmap == null) {
@@ -108,38 +109,17 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(List<FirebaseVisionImageLabel> labels) {
                     float maxConfidence;
-
+                    // I chose to display only top 2 recognitions because the rest if not accurate at all.
                     txtView.setTextSize(30);
                     txtView2.setTextSize(30);
                     txtView.setText(labels.get(0).getText());
                     txtView2.setText(labels.get(1).getText());
-
+                    //The toast displays the highest confidence.
                     Toast.makeText(MainActivity.this, labels.get(0).getText() +
                             " has a highest confidence of " +
                             labels.get(0).getConfidence(), Toast.LENGTH_LONG).show();
-
-
-//                //for (FirebaseVisionImageLabel label: labels){
-//                for (int i=0;i<3;i++) {
-//                    label = labels.get(i);
-//                    Log.d(TAG, label.getText());
-//                    Log.d(TAG, label.getConfidence() + "");
-//
-//
-//                    txtView.setTextSize(20);
-//
-//                    txtView.setText(label.getText());
-//
-//                //   Toast.makeText(this, label.getText(), Toast.LENGTH_SHORT).show();
-//
-//                    maxConfidence = label.getConfidence();
-//
-//
-//                }
-
-
                 }
-            })
+            })//In case something fails and it cannot recognize the image. 
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {

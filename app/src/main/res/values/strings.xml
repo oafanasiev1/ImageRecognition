@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ImageRecognition</string>
+    <string name="Snap">SNAP</string>
+    <string name="Detect">DETECT</string>
 </resources>

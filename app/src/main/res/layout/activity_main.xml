@@ -36,7 +36,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:onClick="takeImage"
-            android:text="Snap" />
+            android:text="@string/Snap" />
 
         <Button
             android:id="@+id/btnDetect"
@@ -45,7 +45,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:onClick="recognizeImage"
-            android:text="Detect" />
+            android:text="@string/Detect" />
     </LinearLayout>
 
     <TextView
@@ -80,15 +80,13 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="TextView1" />
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="TextView2" />
+            android:layout_weight="1" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
